@@ -115,7 +115,7 @@
              </div>
               <div class="form-group">
                  <label for="sequence">sequence</label>
-                 <input type="number" id="sequence" name="sequence"  >
+                 <input type="number" id="sequence" value="{{ old('sequence', $heroslider->link ?? '') }}" name="sequence"  >
              </div>
              <button type="submit" class="submit-btn">
                  {{ isset($heroslider) ? 'Update' : 'Submit' }}

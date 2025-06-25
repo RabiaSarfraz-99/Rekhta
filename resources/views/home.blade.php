@@ -1,8 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Urdu Poetry, Urdu Shayari of Famous Poets - Rekhta')
 
 @section('content')
 <div class="container">
+
   <div class="navigation">
     <div class="left">
       <div class="logo">
@@ -145,7 +146,16 @@
       </svg>
     </div>
   </div>
-  <div class="top-slider"></div>
+  <!-- Slider Wrapper -->
+  <div class="top-slider-wrapper" style="position: relative;">
+    <div class="top-slider"></div>
+
+    <!-- Custom Navigation Buttons -->
+    <div class="top-slider-btn">
+      <div class="prev"><i class="fa fa-chevron-left"></i></div>
+      <div class="next"><i class="fa fa-chevron-right"></i></div>
+    </div>
+  </div>
 
   <!-- top-5 -->
   <div class="top-5">
@@ -193,7 +203,7 @@
           alt="crosswordhome"
           width="303"
           height="336"
-          src="{{ asset('assets/images/crosswordhome.png') }} ') }}" />
+          src="{{ asset('assets/images/crosswordhome.png') }}" />
       </div>
     </div>
   </div>
@@ -418,24 +428,7 @@
   </div>
 
   <!-- featured-video-->
-  <!-- <div class="featured-video">
-        <h2 class="rec-poets-collection-Heading">FEATURED VIDEO</h2>
-        <div class="rec-poets-collection-wrapper slider"></div>
-        <p class="rec-poets-sectionTagLine">
-          Essential collection of Iconic poets – a list that goes beyond the
-          realm of fame and populism
-        </p>
-        <div class="rec-poets-readFullBgBtn">
-          <a
-            class="rec-poets-readFull"
-            title="See full collection"
-            aria-label="See full collection"
-            href="/top-20?wref=rweb"
-            onclick="javascript:pageTracker._trackPageview('hometop20');"
-            >See full collection</a
-          >
-        </div>
-      </div> -->
+
   <section class="video-section">
     <div class="video-section-wrapper">
       <div class="video-title">Featured Video</div>
@@ -445,17 +438,14 @@
             src="https://www.youtube.com/embed/jwhuNLn0qtw"
             allowfullscreen></iframe>
         </div>
-
-        <div class="video-details">
-          <h1><a href="/poets/meer-taqi-meer">Meer Taqi Meer</a></h1>
-          <p>Celebrating 300 years of Meer</p>
+        <div class="video-info">
+          <h3 class="video-title">MEER TAQI MEER</h3>
+          <p class="video-subtitle">CELEBRATING 300 YEARS OF MEER</p>
+          <button class="share-button">
+            <i class="fas fa-share-alt"></i>
+          </button>
         </div>
-
-        <div class="share-buttons">
-          <a href="#" class="share-facebook">Share on Facebook</a>
-          <a href="#" class="share-twitter">Share on Twitter</a>
-          <a href="#" class="share-whatsapp">Share on WhatsApp</a>
-        </div>
+      
       </div>
     </div>
   </section>
@@ -483,23 +473,97 @@
         <h3>MORE FROM REKHTA</h3>
       </div>
       <div class="more-slider">
-        <!-- <div class="more-cards">
-            <div class="more-card">
-              <div class="more-crd-img">
-                <img src="{{ asset('assets/images/more1.jpg')}}" alt="">
-              </div>
-              <div class="more-txt">
-                <h4>हिन्दवी डिक्शनरी</h4>
-                <p>हिंदी क्षेत्र की भाषाओं-बोलियों का व्यापक शब्दकोश</p>
-              </div>
-              <div class="more-btn">
-                <a href=""><span>Learn More<i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
-              </div>
-            </div>
-          </div> -->
+
       </div>
     </div>
   </section>
+  <footer class="rekhta-footer">
+    <!-- Newsletter -->
+    <div class="newsletter">
+      <h2>SUBSCRIBE TO REKHTA NEWSLETTER</h2>
+      <p>Subscribe to Rekhta Newsletter to get all the latest updates</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="YOUR E-MAIL HERE">
+        <button>SUBSCRIBE</button>
+      </div>
+      <label class="privacy-check">
+        <input type="checkbox"> I have read and I agree to Rekhta <a href="#">Privacy Policy</a>
+      </label>
+    </div>
+
+    <!-- Main Footer Grid -->
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Qaafiya Dictionary</a></li>
+          <li><a href="#">Taqti</a></li>
+          <li><a href="#">Urdu Resources</a></li>
+          <li><a href="#">Submit Poetry</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>SITE INFO</h4>
+        <ul>
+          <li><a href="#">Rekhta Foundation</a></li>
+          <li><a href="#">About The Founder</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Career</a></li>
+          <li><a href="#">Rekhta Explorer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>OUR WEBSITES</h4>
+        <ul>
+          <li><a href="#">Hindwi</a></li>
+          <li><a href="#">Sufinama</a></li>
+          <li><a href="#">Rekhta Dictionary</a></li>
+          <li><a href="#">Rekhta Learning</a></li>
+          <li><a href="#">Rekhta Books</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>WRITE TO US</h4>
+        <form class="contact-form">
+          <input type="text" placeholder="NAME">
+          <input type="email" placeholder="E-MAIL">
+          <select>
+            <option selected>SELECT CATEGORY</option>
+          </select>
+          <textarea placeholder="MESSAGE"></textarea>
+          <label class="privacy-check">
+            <input type="checkbox"> I have read and I agree to Rekhta <a href="#">Privacy Policy</a>
+          </label>
+          <button type="submit"><i class="fa fa-paper-plane"></i> SEND MESSAGE</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Social + Apps -->
+    <div class="footer-bottom">
+      <div class="social">
+        <h4>FOLLOW US</h4>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+      </div>
+      <div class="apps">
+        <h4>DOWNLOAD REKHTA APP</h4>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+          alt="Play Store" height="40">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+          alt="App Store" height="40">
+      </div>
+    </div>
+
+    <div class="copyright">
+      <a href="#">PRIVACY POLICY</a> | <a href="#">TERMS OF USE</a> | <a href="#">COPYRIGHT</a>
+      <p>© 2025 Rekhta™ Foundation. All rights reserved.</p>
+    </div>
+  </footer>
 </div>
 
 

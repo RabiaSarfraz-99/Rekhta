@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'Home')</title>
+    <title>@yield('title', config('app.name'))</title>
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,8 +47,6 @@
     <script
         type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-    <script src="script.js"></script>
 </head>
 
 <body>
@@ -56,9 +54,6 @@
     <div class="container">
         @yield('content')
     </div>
-   
-    <script src="{{ asset('asset/js/script.js') }}"></script>
-
     <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
