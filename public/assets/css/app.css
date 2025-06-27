@@ -357,6 +357,7 @@ fieldset {
 /* Wrapper */
 .top-slider-wrapper {
     position: relative;
+    top: 35px;
     width: 100%;
     margin: auto;
     overflow: hidden;
@@ -485,12 +486,21 @@ fieldset {
 .poetry {
     cursor: pointer;
 }
-
+.poetName.x2 {
+    margin-bottom: 54px;
+}
 .poetName {
     font-weight: bold;
     margin-top: 6px;
     font-size: 14px;
     cursor: pointer;
+}
+.poetName a {
+    color: #000;
+    cursor: default;
+    font-family: 'merriweatherheavy', 'NotoDevanagari', 'MehrNastaliqRegular';
+    text-transform: uppercase;
+    text-decoration: none;
 }
 .sher {
     margin-top: 22px;
@@ -541,7 +551,7 @@ fieldset {
     height: 40px;
     background-color: white;
     border: 1px solid #bbb;
-    border-radius: 4px; /* square */
+    border-radius: 50%;
     font-size: 18px;
     color: #ababab;
     cursor: pointer;
