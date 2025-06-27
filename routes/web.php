@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\HerosliderController;
 use App\Http\Controllers\LibrarybooksController;
 use App\Http\Controllers\LearmoreslidesController;
@@ -42,6 +43,8 @@ Route::get('/poetrycollectiondata/json', [PoetrycollectionController::class, 'ge
 Route::get('/shayaricollectiondata/json', [ShayaricollectionController::class, 'getdata'])->name('shayaricollectiondata');
 Route::get('/recommendedpoetsdata/json', [RecommendedpoetsController::class, 'getdata'])->name('recommendedpoetsdata');
 Route::get('/bookslidedata/json', [BooksController::class, 'getdata'])->name('bookslidedata');
+// search
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
