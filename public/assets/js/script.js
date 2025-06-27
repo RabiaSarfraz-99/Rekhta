@@ -719,3 +719,78 @@ selectLAng.addEventListener("click", () => {
         optionBlock.style.display = "none";
     }
 });
+
+// logo data 
+fetch(logodata)
+    .then((response) => response.json())
+    .then((logoimage) => {
+        const logo = document.querySelector(".logo");
+
+        if (logo) {
+
+            logoimage.forEach((logoimg) => {
+                    logo.innerHTML= `<a href="/" title="Logo" aria-label="Logo" class="logoImg"><img
+           width="78"
+           alt="Best poetry resource in urdu"
+           class="lazyloaded"
+           src="assets/uploades/logo/${logoimg.image}" /> </a>`;
+                  
+                }); 
+        }
+    });
+
+    // Nav items data
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.navbar ul');
+    const moreBtn = nav.querySelector(".MoreMenuBtn");
+    const subMenu = moreBtn.querySelector(".subMenu");
+
+    // Toggle subMenu on click
+    moreBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        subMenu.style.display = subMenu.style.display === "block" ? "none" : "block";
+    });
+
+    function isElementHidden(el) {
+        const style = window.getComputedStyle(el);
+        return style.display === "none" || style.visibility === "hidden";
+    }
+
+    function moveHiddenItemsToMore() {
+        subMenu.innerHTML = ''; // Clear old submenu
+        const navItems = document.querySelectorAll(".navbar > ul > .nav-item");
+console.log(navItems);
+        navItems.forEach(item => {
+            if (isElementHidden(item)) {
+                const clone = item.cloneNode(true);
+                subMenu.appendChild(clone);
+            }
+        });
+
+        moreBtn.style.display = subMenu.children.length > 0 ? 'block' : 'none';
+    }
+
+    // Fetch dynamic nav items
+    fetch(navitemdata)
+        .then((response) => response.json())
+        .then((data) => {
+            const moreMenuItem = nav.querySelector(".MoreMenuBtn");
+
+            data.forEach((navEl) => {
+                const li = document.createElement("li");
+                li.classList.add('nav-item');
+                const a = document.createElement("a");
+                a.href = navEl.link;
+                a.textContent = navEl.navitem;
+                li.appendChild(a);
+
+                // Insert before the MORE button
+                moreMenuItem.parentNode.insertBefore(li, moreMenuItem);
+            });
+
+            // 🟢 After inserting, now detect hidden ones
+            moveHiddenItemsToMore();
+            window.addEventListener('resize', moveHiddenItemsToMore);
+        });
+});
+

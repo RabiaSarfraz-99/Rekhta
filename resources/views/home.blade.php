@@ -463,6 +463,8 @@
   const shayaricollectiondata = "{{route('shayaricollectiondata')}}";
   const recommendedpoetsdata = "{{route('recommendedpoetsdata')}}";
   const bookslidedata = "{{route('bookslidedata')}}";
+  const logodata = "{{route('logodata')}}";
+  const navitemdata = "{{route('navitemdata')}}";
 </script>
 
 
