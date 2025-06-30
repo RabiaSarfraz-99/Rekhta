@@ -52,6 +52,23 @@
         const nav = document.querySelector(".navbar ul");
         const moreBtn = nav.querySelector(".MoreMenuBtn");
         const subMenu = moreBtn.querySelector(".subMenu");
+
+        // logo data
+        fetch(logodata)
+            .then((response) => response.json())
+            .then((logoimage) => {
+                const logo = document.querySelector(".logo");
+
+                if (logo) {
+                    logoimage.forEach((logoimg) => {
+                        logo.innerHTML = `<a href="/" title="Logo" aria-label="Logo" class="logoImg"><img
+           width="78"
+           alt="Best poetry resource in urdu"
+           class="lazyloaded"
+           src="assets/uploades/logo/${logoimg.image}" /> </a>`;
+                    });
+                }
+            });
         // Toggle subMenu on click
         moreBtn.addEventListener("click", (e) => {
             e.preventDefault();
