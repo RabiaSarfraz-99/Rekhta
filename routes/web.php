@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\LogosController;
 use App\Http\Controllers\NavbaritemsController;
+use App\Http\Controllers\WordOfTheDayController;
 
 Route::get('/', function () {
     return view('home');
@@ -155,5 +156,15 @@ Route::get('/editlogo/{id}', [LogosController::class, 'edit'])->name('editlogo')
 Route::put('/updatelogo/{id}', [LogosController::class, 'update'])->name('updatelogo');
 Route::delete('/deletelogo/{id}', [LogosController::class, 'destroy'])->name('deletelogo');
 Route::get('/viewlogolist/{id}', [LogosController::class, 'show'])->name('viewlogolist');
+
+
+// Word of the Day routes
+Route::get('/addWord', [WordOfTheDayController::class, 'create'])->name('addWord');
+Route::post('/Wordoftheday', [WordOfTheDayController::class, 'store'])->name('Wordoftheday');
+Route::get('/wordlist', [WordOfTheDayController::class, 'index'])->name('wordlist');
+Route::get('/editword/{id}', [WordOfTheDayController::class, 'edit'])->name('editword');
+Route::put('/updateword/{id}', [WordOfTheDayController::class, 'update'])->name('updateword');
+Route::delete('/deleteword/{id}', [WordOfTheDayController::class, 'destroy'])->name('deleteword');
+Route::get('/viewwordslist/{id}', [WordOfTheDayController::class, 'show'])->name('viewwordslist');
 
 // });

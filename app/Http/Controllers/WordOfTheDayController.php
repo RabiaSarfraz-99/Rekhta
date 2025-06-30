@@ -12,7 +12,8 @@ class WordOfTheDayController extends Controller
      */
     public function index()
     {
-        //
+        $wordoftheday = WordOfTheDay::first()->paginate(10);
+        return view('backend.wordoftheday.index' , compact('topshayari'));
     }
 
     /**
@@ -20,7 +21,7 @@ class WordOfTheDayController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.wordoftheday.add');
     }
 
     /**
@@ -28,7 +29,19 @@ class WordOfTheDayController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'engword' => 'required|string',
+            'hinword' => 'required|string',
+            'urdword' => 'required|string',
+            'meaning' => 'required|string',
+            'sher' => 'required|string',
+            'poet' => 'required|string',
+            'link' => 'required|string',
+            'meaning' => 'required|string',
+        ]);
+       
+        WordOfTheDay::create($validate);
+        return redirect()->route('wordlist')->with('success', ' added!');
     }
 
     /**

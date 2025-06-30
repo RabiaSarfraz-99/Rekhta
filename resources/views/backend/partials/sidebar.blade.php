@@ -31,7 +31,7 @@
                       <span class="nav-text">Analytics</span>
                   </a>
               </li>
-                <li class="nav-item">
+              <li class="nav-item">
                   <a href="#" class="nav-link toggle-dropdown">
                       <span class="nav-icon">📈</span>
                       <span class="nav-text">Change Logo</span>
@@ -131,8 +131,6 @@
                       <li><a href="{{ route('addrecommendedpoets') }}">Add Recommended Poets</a></li>
                   </ul>
               </li>
-
-              </li>
               <li class="nav-item">
                   <a href="#" class="nav-link toggle-dropdown">
                       <span class="nav-icon">📈</span>
@@ -142,6 +140,17 @@
                   <ul class="submenu">
                       <li><a href="{{ route('bookslisting') }}">Books listing</a></li>
                       <li><a href="{{ route('addbooks') }}">Add Books</a></li>
+                  </ul>
+              </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link toggle-dropdown">
+                      <span class="nav-icon">📈</span>
+                      <span class="nav-text">Word of the Day</span>
+                      <span class="dropdown-arrow">▼</span>
+                  </a>
+                  <ul class="submenu">
+                      <li><a href="{{ route('bookslisting') }}">Words listing</a></li>
+                      <li><a href="{{ route('addWord') }}">Add Word</a></li>
                   </ul>
               </li>
               <li class="nav-item">
