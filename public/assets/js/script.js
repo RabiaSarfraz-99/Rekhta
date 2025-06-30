@@ -1,236 +1,249 @@
-(function ($) {
-    /* ───── 1. Global arrow markup ───── */
-    const prevArrowTpl =
-        '<button type="button" class="p-prev custom-arrow" aria-label="Previous slide">&#10094;</button>';
-    const nextArrowTpl =
-        '<button type="button" class="p-next custom-arrow" aria-label="Next slide">&#10095;</button>';
+/* ───── 1. Global arrow markup ───── */
+const prevArrowTpl =
+    '<button type="button" class="p-prev custom-arrow" aria-label="Previous slide">&#10094;</button>';
+const nextArrowTpl =
+    '<button type="button" class="p-next custom-arrow" aria-label="Next slide">&#10095;</button>';
 
-    /* ───── 2. Generic initializer with auto-hide logic ───── */
-    function initSlider($el, opts = {}) {
-        if (!$el.length) return;
+/* ───── 2. Generic initializer with auto-hide logic ───── */
+function initSlider($el, opts = {}) {
+    if (!$el.length) return;
 
-        const defaults = {
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            infinite: false,
-            arrows: true,
-            dots: false,
-            autoplay: false,
-            prevArrow: prevArrowTpl,
-            nextArrow: nextArrowTpl,
-            responsive: [
-                { breakpoint: 1024, settings: { slidesToShow: 3 } },
-                { breakpoint: 768, settings: { slidesToShow: 2 } },
-                { breakpoint: 480, settings: { slidesToShow: 1 } },
-            ],
-        };
-        const config = $.extend(true, {}, defaults, opts);
+    const defaults = {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: false,
+        arrows: true,
+        dots: false,
+        autoplay: false,
+        prevArrow: prevArrowTpl,
+        nextArrow: nextArrowTpl,
+        responsive: [
+            { breakpoint: 1024, settings: { slidesToShow: 3 } },
+            { breakpoint: 768, settings: { slidesToShow: 2 } },
+            { breakpoint: 480, settings: { slidesToShow: 1 } },
+        ],
+    };
+    const config = $.extend(true, {}, defaults, opts);
 
-        // Arrow visibility
-        $el.on("init reInit afterChange", function (e, slick, cur) {
-            const i = cur || 0;
-            const $prev = $(this).find(".p-prev");
-            const $next = $(this).find(".p-next");
+    // Arrow visibility
+    $el.on("init reInit afterChange", function (e, slick, cur) {
+        const i = cur || 0;
+        const $prev = $(this).find(".p-prev");
+        const $next = $(this).find(".p-next");
 
-            if (
-                slick.options.infinite ||
-                slick.slideCount <= slick.options.slidesToShow
-            ) {
-                $prev.show();
-                $next.show();
-            } else {
-                $prev.toggle(i !== 0);
-                $next.toggle(i < slick.slideCount - slick.options.slidesToShow);
-            }
-        });
+        if (
+            slick.options.infinite ||
+            slick.slideCount <= slick.options.slidesToShow
+        ) {
+            $prev.show();
+            $next.show();
+        } else {
+            $prev.toggle(i !== 0);
+            $next.toggle(i < slick.slideCount - slick.options.slidesToShow);
+        }
+    });
 
-        $el.slick(config);
-    }
+    $el.slick(config);
+}
 
-    /* ───── 3. When DOM is ready, build all sliders ───── */
-    document.addEventListener("DOMContentLoaded", () => {
-        const nav = document.querySelector(".navbar ul");
-        const moreBtn = nav.querySelector(".MoreMenuBtn");
-        const subMenu = moreBtn.querySelector(".subMenu");
+/* ───── 3. When DOM is ready, build all sliders ───── */
+document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.querySelector(".navbar ul");
+    const moreBtn = nav.querySelector(".MoreMenuBtn");
+    const subMenu = moreBtn.querySelector(".subMenu");
 
-        // logo data
-        fetch(logodata)
-            .then((response) => response.json())
-            .then((logoimage) => {
-                const logo = document.querySelector(".logo");
+    // logo data
+    fetch(logodata)
+        .then((response) => response.json())
+        .then((logoimage) => {
+            const logo = document.querySelector(".logo");
 
-                if (logo) {
-                    logoimage.forEach((logoimg) => {
-                        logo.innerHTML = `<a href="/" title="Logo" aria-label="Logo" class="logoImg"><img
+            if (logo) {
+                logoimage.forEach((logoimg) => {
+                    logo.innerHTML = `<a href="/" title="Logo" aria-label="Logo" class="logoImg"><img
            width="78"
            alt="Best poetry resource in urdu"
            class="lazyloaded"
            src="assets/uploades/logo/${logoimg.image}" /> </a>`;
-                    });
-                }
-            });
-        // Toggle subMenu on click
-        moreBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            subMenu.style.display =
-                subMenu.style.display === "block" ? "none" : "block";
+                });
+            }
+        });
+    // word of the day
+    // fetch(logodata)
+    //     .then((response) => response.json())
+    //     .then((logoimage) => {
+    //         const logo = document.querySelector(".logo");
+
+    //         if (logo) {
+    //             logoimage.forEach((logoimg) => {
+    //                 logo.innerHTML = `<a href="/" title="Logo" aria-label="Logo" class="logoImg"><img
+    //        width="78"
+    //        alt="Best poetry resource in urdu"
+    //        class="lazyloaded"
+    //        src="assets/uploades/logo/${logoimg.image}" /> </a>`;
+    //             });
+    //         }
+    //     });
+
+    // Toggle subMenu on click
+    moreBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        subMenu.style.display =
+            subMenu.style.display === "block" ? "none" : "block";
+    });
+
+    function isElementHidden(el) {
+        const style = window.getComputedStyle(el);
+        return style.display === "none" || style.visibility === "hidden";
+    }
+
+    function moveHiddenItemsToMore() {
+        subMenu.innerHTML = ""; // Clear old submenu
+        const navItems = document.querySelectorAll(".navbar > ul > .nav-item");
+        console.log(navItems);
+        navItems.forEach((item) => {
+            if (isElementHidden(item)) {
+                const clone = item.cloneNode(true);
+                subMenu.appendChild(clone);
+            }
         });
 
-        function isElementHidden(el) {
-            const style = window.getComputedStyle(el);
-            return style.display === "none" || style.visibility === "hidden";
-        }
+        moreBtn.style.display = subMenu.children.length > 0 ? "block" : "none";
+    }
 
-        function moveHiddenItemsToMore() {
-            subMenu.innerHTML = ""; // Clear old submenu
-            const navItems = document.querySelectorAll(
-                ".navbar > ul > .nav-item"
-            );
-            console.log(navItems);
-            navItems.forEach((item) => {
-                if (isElementHidden(item)) {
-                    const clone = item.cloneNode(true);
-                    subMenu.appendChild(clone);
-                }
+    // Fetch dynamic nav items
+    fetch(navitemdata)
+        .then((response) => response.json())
+        .then((data) => {
+            const moreMenuItem = nav.querySelector(".MoreMenuBtn");
+
+            data.forEach((navEl) => {
+                const li = document.createElement("li");
+                li.classList.add("nav-item");
+                const a = document.createElement("a");
+                a.href = navEl.link;
+                a.textContent = navEl.navitem;
+                li.appendChild(a);
+
+                // Insert before the MORE button
+                moreMenuItem.parentNode.insertBefore(li, moreMenuItem);
             });
 
-            moreBtn.style.display =
-                subMenu.children.length > 0 ? "block" : "none";
-        }
+            // 🟢 After inserting, now detect hidden ones
+            moveHiddenItemsToMore();
+            window.addEventListener("resize", moveHiddenItemsToMore);
+        });
+    /* ---------- Top hero slider ---------- */
+    fetch(herosliderdata)
+        .then((response) => response.json())
+        .then((slideImages) => {
+            const topSlider = document.querySelector(".top-slider");
 
-        // Fetch dynamic nav items
-        fetch(navitemdata)
-            .then((response) => response.json())
-            .then((data) => {
-                const moreMenuItem = nav.querySelector(".MoreMenuBtn");
-
-                data.forEach((navEl) => {
-                    const li = document.createElement("li");
-                    li.classList.add("nav-item");
+            if (topSlider) {
+                slideImages.forEach((slide) => {
                     const a = document.createElement("a");
-                    a.href = navEl.link;
-                    a.textContent = navEl.navitem;
-                    li.appendChild(a);
-
-                    // Insert before the MORE button
-                    moreMenuItem.parentNode.insertBefore(li, moreMenuItem);
+                    a.className = "slide";
+                    const img = document.createElement("img");
+                    img.src = `assets/uploades/heroslider/${slide.image}`;
+                    img.alt = "";
+                    a.appendChild(img);
+                    topSlider.appendChild(a);
                 });
+            }
 
-                // 🟢 After inserting, now detect hidden ones
-                moveHiddenItemsToMore();
-                window.addEventListener("resize", moveHiddenItemsToMore);
-            });
-        /* ---------- Top hero slider ---------- */
-        fetch(herosliderdata)
-            .then((response) => response.json())
-            .then((slideImages) => {
-                const topSlider = document.querySelector(".top-slider");
-
-                if (topSlider) {
-                    slideImages.forEach((slide) => {
-                        const a = document.createElement("a");
-                        a.className = "slide";
-                        const img = document.createElement("img");
-                        img.src = `assets/uploades/heroslider/${slide.image}`;
-                        img.alt = "";
-                        a.appendChild(img);
-                        topSlider.appendChild(a);
-                    });
-                }
-
-                // Initialize Slick after content is loaded
-                $(document).ready(function () {
-                    $(".top-slider").slick({
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: true,
-                        dots: true,
-                        autoplay: false,
-                        autoplaySpeed: 3000,
-                        prevArrow: $(".prev"),
-                        nextArrow: $(".next"),
-                        responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: {
-                                    slidesToShow: 1,
-                                },
+            // Initialize Slick after content is loaded
+            $(document).ready(function () {
+                $(".top-slider").slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: true,
+                    dots: true,
+                    autoplay: false,
+                    autoplaySpeed: 3000,
+                    prevArrow: $(".prev"),
+                    nextArrow: $(".next"),
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 1,
                             },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 1,
-                                },
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 1,
                             },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 1,
-                                },
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
                             },
-                        ],
-                    });
+                        },
+                    ],
                 });
             });
-        /* ---------- Poetry TOP-5 slider (static) ---------- */
+        });
+    /* ---------- Poetry TOP-5 slider (static) ---------- */
 
-        const poetryData = [
-            {
-                lines: `na jaane kis kī hameñ umr bhar talāsh rahī
+    const poetryData = [
+        {
+            lines: `na jaane kis kī hameñ umr bhar talāsh rahī
 jise qarīb se dekhā vo dūsrā niklā`,
-                poet: "Khalilur Rahman Azmi",
-                link: "https://www.rekhta.org/poets/vafa-malikpuri?wref=rweb",
-            },
-            {
-                lines: `koī deewānā kehtā hai koī pāgal samajhtā hai
+            poet: "Khalilur Rahman Azmi",
+            link: "https://www.rekhta.org/poets/vafa-malikpuri?wref=rweb",
+        },
+        {
+            lines: `koī deewānā kehtā hai koī pāgal samajhtā hai
 magar dhartī kī bechainī ko bas bādal samajhtā hai`,
-                poet: "Kumar Vishwas",
-                link: "https://www.rekhta.org/poets/kumar-vishwas?wref=rweb",
-            },
-            {
-                lines: `hazāroñ ḳhvāhisheñ aisī ki har ḳhvāhish pe dam nikle
+            poet: "Kumar Vishwas",
+            link: "https://www.rekhta.org/poets/kumar-vishwas?wref=rweb",
+        },
+        {
+            lines: `hazāroñ ḳhvāhisheñ aisī ki har ḳhvāhish pe dam nikle
 bahut nikle mire armān lekin phir bhī kam nikle`,
-                poet: "Mirza Ghalib",
-                link: "https://www.rekhta.org/poets/mirza-ghalib?wref=rweb",
-            },
-        ];
-        /* ---------- Poetry TOP-5 slider (dynamic via fetch) ---------- */
-        fetch(topshayaridata)
-            .then((response) => response.json())
-            .then((poetryData) => {
-                const $top5 = $(".top-5-slider");
+            poet: "Mirza Ghalib",
+            link: "https://www.rekhta.org/poets/mirza-ghalib?wref=rweb",
+        },
+    ];
+    /* ---------- Poetry TOP-5 slider (dynamic via fetch) ---------- */
+    fetch(topshayaridata)
+        .then((response) => response.json())
+        .then((poetryData) => {
+            const $top5 = $(".top-5-slider");
 
-                poetryData.forEach((p) => {
-                    if (!p || !p.lines || typeof p.lines !== "string") return; // skip bad entries
+            poetryData.forEach((p) => {
+                if (!p || !p.lines || typeof p.lines !== "string") return; // skip bad entries
 
-                    const l = p.lines.split(/\r?\n|\/|\\|\|/); // split by newline or slash or pipe
-                    $("<div>", { class: "slide" })
-                        .html(
-                            `<div class="sher"><p>${l[0] || ""}</p><p>${
-                                l[1] || ""
-                            }</p></div>
+                const l = p.lines.split(/\r?\n|\/|\\|\|/); // split by newline or slash or pipe
+                $("<div>", { class: "slide" })
+                    .html(
+                        `<div class="sher"><p>${l[0] || ""}</p><p>${
+                            l[1] || ""
+                        }</p></div>
                      <div class="poetName x2"><a href="${
                          p.link || "#"
                      }" target="_blank">${p.poet || "Unknown"}</a></div>`
-                        )
-                        .appendTo($top5);
-                });
-
-                initSlider($top5, { slidesToShow: 1 });
-            })
-            .catch((error) => {
-                console.error("Error loading Top Shayari data:", error);
+                    )
+                    .appendTo($top5);
             });
 
-        /* ---------- Poetry-collection cards ---------- */
-        fetch(poetrycollectiondata)
-            .then((r) => r.json())
-            .then((cards) => {
-                const $wrap = $(".poetry-collection-wrapper");
-                cards.forEach((c) =>
-                    $("<div>", { class: "poetry-collection-card" })
-                        .html(
-                            `<a href="${c.url}" title="${c.title}" aria-label="${c.title}">
+            initSlider($top5, { slidesToShow: 1 });
+        })
+        .catch((error) => {
+            console.error("Error loading Top Shayari data:", error);
+        });
+
+    /* ---------- Poetry-collection cards ---------- */
+    fetch(poetrycollectiondata)
+        .then((r) => r.json())
+        .then((cards) => {
+            const $wrap = $(".poetry-collection-wrapper");
+            cards.forEach((c) =>
+                $("<div>", { class: "poetry-collection-card" })
+                    .html(
+                        `<a href="${c.url}" title="${c.title}" aria-label="${c.title}">
                            <div class="poetry-collection-card-content">
                              <div class="poetry-collection-card-img">
                                <img src="assets/uploades/poetrycollection/${c.image}" alt="${c.title}" width="259" height="210">
@@ -238,22 +251,22 @@ bahut nikle mire armān lekin phir bhī kam nikle`,
                              <h3>${c.title}<span class="HeadingFade"></span></h3>
                            </div>
                          </a>`
-                        )
-                        .appendTo($wrap)
-                );
-                initSlider($wrap); // default 4-up
-            });
+                    )
+                    .appendTo($wrap)
+            );
+            initSlider($wrap); // default 4-up
+        });
 
-        /* ---------- Books slider (AJAX) ---------- */
-        $.getJSON($(".book-slider").data("url"), (books) => {
-            const $books = $(".book-slider");
-            books.forEach((b) =>
-                $("<div>", { class: "book-slide" })
-                    .html(
-                        `<a href="${b.link}" target="_blank">
+    /* ---------- Books slider (AJAX) ---------- */
+    $.getJSON($(".book-slider").data("url"), (books) => {
+        const $books = $(".book-slider");
+        books.forEach((b) =>
+            $("<div>", { class: "book-slide" })
+                .html(
+                    `<a href="${b.link}" target="_blank">
                        <img src="assets/uploades/books/${b.image}" alt="${
-                            b.title
-                        }">
+                        b.title
+                    }">
                        <div class="book-detail">
                          <p class="bookTitle"><a target="_blank" href="${
                              b.link
@@ -262,27 +275,27 @@ bahut nikle mire armān lekin phir bhī kam nikle`,
                          <p class="bookRating">${b.rating || ""}</p>
                        </div>
                      </a>`
-                    )
-                    .appendTo($books)
-            );
-            initSlider($books, {
-                slidesToShow: 5.5,
-            });
+                )
+                .appendTo($books)
+        );
+        initSlider($books, {
+            slidesToShow: 5.5,
         });
+    });
 
-        /* ---------- Any later sliders (shayari, poets, learn-more…) ----------
+    /* ---------- Any later sliders (shayari, poets, learn-more…) ----------
            Build the DOM first, then simply:
            initSlider($('.your-wrapper'), { slidesToShow: 4 … });
         --------------------------------------------------------------------- */
-        /* ---------- Shayari Collection Slider ---------- */
-        fetch(shayaricollectiondata)
-            .then((r) => r.json())
-            .then((cards) => {
-                const $wrap = $(".shayari-collection-wrapper");
-                cards.forEach((c) =>
-                    $("<div>", { class: "shayari-collection-card" })
-                        .html(
-                            `<a href="${c.url}" title="${c.title}" aria-label="${c.title}">
+    /* ---------- Shayari Collection Slider ---------- */
+    fetch(shayaricollectiondata)
+        .then((r) => r.json())
+        .then((cards) => {
+            const $wrap = $(".shayari-collection-wrapper");
+            cards.forEach((c) =>
+                $("<div>", { class: "shayari-collection-card" })
+                    .html(
+                        `<a href="${c.url}" title="${c.title}" aria-label="${c.title}">
                   <div class="shayari-collection-card-content">
                     <div class="shayari-collection-card-img">
                       <img src="assets/uploades/shayaricollection/${c.image}" alt="${c.title}" width="259" height="210">
@@ -290,21 +303,21 @@ bahut nikle mire armān lekin phir bhī kam nikle`,
                     <h3>${c.title}<span class="HeadingFade"></span></h3>
                   </div>
                 </a>`
-                        )
-                        .appendTo($wrap)
-                );
-                initSlider($wrap);
-            });
+                    )
+                    .appendTo($wrap)
+            );
+            initSlider($wrap);
+        });
 
-        /* ---------- Recommended Poets Slider ---------- */
-        fetch(recommendedpoetsdata)
-            .then((r) => r.json())
-            .then((cards) => {
-                const $wrap = $(".rec-poets-collection-wrapper");
-                cards.forEach((c) =>
-                    $("<div>", { class: "rec-poets-collection-card" })
-                        .html(
-                            `<a href="${c.url}" title="${c.title}" aria-label="${c.title}">
+    /* ---------- Recommended Poets Slider ---------- */
+    fetch(recommendedpoetsdata)
+        .then((r) => r.json())
+        .then((cards) => {
+            const $wrap = $(".rec-poets-collection-wrapper");
+            cards.forEach((c) =>
+                $("<div>", { class: "rec-poets-collection-card" })
+                    .html(
+                        `<a href="${c.url}" title="${c.title}" aria-label="${c.title}">
                   <div class="rec-poets-collection-card-content">
                     <div class="rec-poets-collection-card-img">
                       <img src="assets/uploades/recommendedpoets/${c.image}" alt="${c.title}" width="259" height="210">
@@ -312,21 +325,21 @@ bahut nikle mire armān lekin phir bhī kam nikle`,
                     <h3>${c.name}<span class="HeadingFade"></span></h3>
                   </div>
                 </a>`
-                        )
-                        .appendTo($wrap)
-                );
-                initSlider($wrap);
-            });
+                    )
+                    .appendTo($wrap)
+            );
+            initSlider($wrap);
+        });
 
-        /* ---------- Learn More Slider ---------- */
-        fetch(learnmoredata)
-            .then((r) => r.json())
-            .then((cards) => {
-                const $wrap = $(".more-slider");
-                cards.forEach((c) =>
-                    $("<div>", { class: "more-cards" })
-                        .html(
-                            `<div class="more-card">
+    /* ---------- Learn More Slider ---------- */
+    fetch(learnmoredata)
+        .then((r) => r.json())
+        .then((cards) => {
+            const $wrap = $(".more-slider");
+            cards.forEach((c) =>
+                $("<div>", { class: "more-cards" })
+                    .html(
+                        `<div class="more-card">
                    <div class="more-crd-img">
                      <img src="assets/uploades/learnmore/${c.image}" alt="">
                    </div>
@@ -338,28 +351,28 @@ bahut nikle mire armān lekin phir bhī kam nikle`,
                      <a href="${c.link}"><span>Learn More<i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
                    </div>
                  </div>`
-                        )
-                        .appendTo($wrap)
-                );
-                initSlider($wrap, {
-                    slidesToShow: 3,
-                    variableWidth: true,
-                    responsive: [
-                        { breakpoint: 992, settings: { slidesToShow: 2 } },
-                        { breakpoint: 576, settings: { slidesToShow: 1 } },
-                    ],
-                });
+                    )
+                    .appendTo($wrap)
+            );
+            initSlider($wrap, {
+                slidesToShow: 3,
+                variableWidth: true,
+                responsive: [
+                    { breakpoint: 992, settings: { slidesToShow: 2 } },
+                    { breakpoint: 576, settings: { slidesToShow: 1 } },
+                ],
             });
+        });
 
-        /* ---------- Library Books Cards (No slider — static cards) ---------- */
-        fetch(librarybookdata)
-            .then((r) => r.json())
-            .then((books) => {
-                const $wrap = $(".library-cards");
-                books.forEach((b) =>
-                    $("<div>", { class: "book-card" })
-                        .html(
-                            `<div class="card-content">
+    /* ---------- Library Books Cards (No slider — static cards) ---------- */
+    fetch(librarybookdata)
+        .then((r) => r.json())
+        .then((books) => {
+            const $wrap = $(".library-cards");
+            books.forEach((b) =>
+                $("<div>", { class: "book-card" })
+                    .html(
+                        `<div class="card-content">
                    <div class="backg-image" style="background-image: url('assets/uploades/librarybook/${
                        b.image
                    }')"></div>
@@ -380,9 +393,8 @@ bahut nikle mire armān lekin phir bhī kam nikle`,
                      </div>
                    </div>
                  </div>`
-                        )
-                        .appendTo($wrap)
-                );
-            });
-    });
-})(jQuery);
+                    )
+                    .appendTo($wrap)
+            );
+        });
+});

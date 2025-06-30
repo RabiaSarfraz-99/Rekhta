@@ -99,6 +99,7 @@
     <div class="small-heading">
       <h2>WORD OF THE DAY</h2>
     </div>
+    <div class="wordoftheday">
     <div class="big-heading">
       <p>quvvat</p>
     </div>
@@ -126,6 +127,7 @@
     </div>
     <div class="poet">
       <p><span>by</span><a href=""> Fahmi Badayuni</a></p>
+    </div>
     </div>
     <div class="word-search">
       <div class="dictionary">

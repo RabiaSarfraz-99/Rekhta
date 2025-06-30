@@ -9,6 +9,7 @@ class WordOfTheDay extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'date',
         'engword',
         'hinword',
         'urdword',

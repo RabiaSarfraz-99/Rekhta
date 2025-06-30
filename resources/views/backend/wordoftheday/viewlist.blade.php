@@ -60,17 +60,36 @@
 
     <div class="view-wrapper">
         <h2 class="view-title">View Navbar Detail</h2>
-        <div class="view-field">
-            <h3>Image:</h3>
-            <img id="imagePreview" src="{{ asset('assets/uploades/logo/' . $logoitem->image) }}"  alt="Preview"
-                style="max-width: 200px; margin-top: 10px;">
-        </div>
 
-    
+
+        <div class="view-field">
+            <label>Word in English:</label>
+            <p><a href="{{ $wordoftheday->engword }}" target="_blank">{{ $wordoftheday->link }}</a></p>
+        </div>
+        <div class="view-field">
+            <label>Word in Hindi:</label>
+            <p><a href="{{ $wordoftheday->hinword }}" target="_blank">{{ $wordoftheday->link }}</a></p>
+        </div>
+        <div class="view-field">
+            <label>Word in Urdu:</label>
+            <p><a href="{{ $wordoftheday->urdword }}" target="_blank">{{ $wordoftheday->link }}</a></p>
+        </div>
+        <div class="view-field">
+            <label>Meaning of Word:</label>
+            <p><a href="{{ $wordoftheday->meaning }}" target="_blank">{{ $wordoftheday->link }}</a></p>
+        </div>
+        <div class="view-field">
+            <label>Sher:</label>
+            <p><a href="{{ $wordoftheday->sher }}" target="_blank">{{ $wordoftheday->link }}</a></p>
+        </div>
+        <div class="view-field">
+            <label>Poet:</label>
+            <p><a href="{{ $wordoftheday->poet }}" target="_blank">{{ $wordoftheday->link }}</a></p>
+        </div>
 
         <div class="view-field">
             <label>Link:</label>
-            <p><a href="{{ $logoitem->link }}" target="_blank">{{ $logoitem->link }}</a></p>
+            <p><a href="{{ $wordoftheday->link }}" target="_blank">{{ $wordoftheday->link }}</a></p>
         </div>
 
 

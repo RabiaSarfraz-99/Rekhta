@@ -85,68 +85,68 @@
 
          <div class="form-container">
              <h2>Create New Record</h2>
-             <form action="{{ isset($logoitem) ? route('updateword', $logoitem->id) : route('Wordoftheday') }}" method="POST"
+             <form action="{{ isset($wordoftheday) ? route('updateword', $wordoftheday->id) : route('Wordoftheday') }}" method="POST"
                  enctype="multipart/form-data">
 
 
                  @csrf
-                 @if (isset($logoitem))
+                 @if (isset($wordoftheday))
                      @method('PUT')
                  @endif
 
 
 
-                 <div class="form-group">
+                 {{-- <div class="form-group"> --}}
                      {{-- <label for="image">Upload Logo Image *</label>
                      <input type="file" id="imageUpload" name="image" accept="image/*">
                      <div class="avatar-img mb-3">
                          <img id="imagePreview"
-                             src="{{ isset($logoitem) && $logoitem->image ? asset('assets/uploades/logo/' . $logoitem->image) : '#' }}"
+                             src="{{ isset($wordoftheday) && $wordoftheday->image ? asset('assets/uploades/logo/' . $wordoftheday->image) : '#' }}"
                              alt="Image Preview"
-                             style="{{ isset($logoitem) && $logoitem->image ? '' : 'display:none;' }} max-width: 200px; margin-top: 10px;">
+                             style="{{ isset($wordoftheday) && $wordoftheday->image ? '' : 'display:none;' }} max-width: 200px; margin-top: 10px;">
                      </div> --}}
 
 
                      <div class="form-group">
                          <label for="engword">Word in English</label>
                          <input type="text" id="engword" name="engword"
-                             value="{{ old('engword', $logoitem->engword ?? '') }}">
+                             value="{{ old('engword', $wordoftheday->engword ?? '') }}">
                      </div>
                      <div class="form-group">
                          <label for="hinword">Word in Hindi</label>
                          <input type="text" id="hinword" name="hinword"
-                             value="{{ old('hinword', $logoitem->hinword ?? '') }}">
+                             value="{{ old('hinword', $wordoftheday->hinword ?? '') }}">
                      </div>
                      <div class="form-group">
                          <label for="urdword">Word in Urdu</label>
                          <input type="text" id="urdword" name="urdword"
-                             value="{{ old('urdword', $logoitem->urdword ?? '') }}">
+                             value="{{ old('urdword', $wordoftheday->urdword ?? '') }}">
                      </div>
                      <div class="form-group">
                          <label for="meaning">Meaning of the Word</label>
                          <input type="text" id="meaning" name="meaning"
-                             value="{{ old('meaning', $logoitem->meaning ?? '') }}">
+                             value="{{ old('meaning', $wordoftheday->meaning ?? '') }}">
                      </div>
 
                      <div class="form-group">
                          <label for="sher">Sher</label>
                          <input type="text" id="sher" name="sher"
-                             value="{{ old('sher', $logoitem->sher ?? '') }}">
+                             value="{{ old('sher', $wordoftheday->sher ?? '') }}">
                      </div>
                      <div class="form-group">
                          <label for="poet">Poet</label>
                          <input type="text" id="poet" name="poet"
-                             value="{{ old('poet', $logoitem->poet ?? '') }}">
+                             value="{{ old('poet', $wordoftheday->poet ?? '') }}">
 
                      </div>
                      <div class="form-group">
                          <label for="link">Link to Profile</label>
                          <input type="text" id="link" name="link"
-                             value="{{ old('link', $logoitem->link ?? '') }}">
+                             value="{{ old('link', $wordoftheday->link ?? '') }}">
                      </div>
 
                      <button type="submit" class="submit-btn">
-                         {{ isset($logoitem) ? 'Update' : 'Submit' }}
+                         {{ isset($wordoftheday) ? 'Update' : 'Submit' }}
                      </button>
 
                      <div class="note">All fields marked with * are required.</div>

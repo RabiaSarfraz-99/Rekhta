@@ -10,10 +10,15 @@ class WordOfTheDayController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function getdata()
+    {
+        $wordoftheday = WordOfTheDay::where('date', now()->toDateString())->first();
+        return response()->json($wordoftheday);
+    }
     public function index()
     {
         $wordoftheday = WordOfTheDay::first()->paginate(10);
-        return view('backend.wordoftheday.index' , compact('topshayari'));
+        return view('backend.wordoftheday.index', compact('wordoftheday'));
     }
 
     /**
@@ -39,7 +44,7 @@ class WordOfTheDayController extends Controller
             'link' => 'required|string',
             'meaning' => 'required|string',
         ]);
-       
+
         WordOfTheDay::create($validate);
         return redirect()->route('wordlist')->with('success', ' added!');
     }
@@ -47,32 +52,46 @@ class WordOfTheDayController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(WordOfTheDay $wordOfTheDay)
+    public function show($id)
     {
-        //
+        $wordoftheday = WordOfTheDay::findOrFail($id);
+        return view('backend.wordoftheday.viewlist', compact('wordoftheday'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(WordOfTheDay $wordOfTheDay)
+    public function edit($id)
     {
-        //
+        $wordoftheday = WordOfTheDay::findOrFail($id);
+        return view('backend.wordoftheday.add', compact('wordoftheday'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, WordOfTheDay $wordOfTheDay)
+    public function update(Request $request, $id)
     {
-        //
+        $validate = $request->validate([
+            'engword' => 'required|string',
+            'hinword' => 'required|string',
+            'urdword' => 'required|string',
+            'meaning' => 'required|string',
+            'sher' => 'required|string',
+            'poet' => 'required|string',
+            'link' => 'required|string',
+            'meaning' => 'required|string',
+        ]);
+
+        $wordoftheday = WordOfTheDay::findOrFail($id);
+        $wordoftheday->update();
+        return redirect()->route('wordlist')->with('success', ' added!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(WordOfTheDay $wordOfTheDay)
+    public function destroy($id)
     {
-        //
+        $wordoftheday = WordOfTheDay::findOrFail($id);
+        $wordoftheday->delete();
+        return redirect()->route('wordlist')->with('success', 'deleted successfully.');
     }
 }

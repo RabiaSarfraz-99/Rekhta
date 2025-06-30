@@ -89,8 +89,13 @@
              <thead>
                  <tr>
                      <th>#</th>
-                     <th>image</th>
-                     <th>Link</th>
+                     <th>Word in Eng</th>
+                     <th>Word in Hin</th>
+                     <th>Word in Urdu</th>
+                     <th>Meaning</th>
+                     <th>Sher</th>
+                     <th>Poet</th>
+                     <th>Link to Profile</th>
                      <!-- <th>Email</th>
                 <th>Status</th>
                 <th>Created At</th> -->
@@ -99,25 +104,22 @@
              </thead>
              <tbody>
                  <!-- Sample Row -->
-                 @foreach ($logoitem as $item)
+                 @foreach ($wordoftheday as $item)
                      <tr>
                          <td>{{ $item->id }}</td>
-                         <td>
-                             <div class="avatar-img mb-3">
-                                 @if ($item->image)
-                                     <img src="{{ asset('/assets/uploades/logo/' . $item->image) }}" alt="Image"
-                                         width="180">
-                                 @else
-                                     N/A
-                                 @endif
-                             </div>
-                         </td>
+                         <td>{{ $item->engword }}</td>
+                         <td>{{ $item->hinword }}</td>
+                         <td>{{ $item->urdword }}</td>
+                         <td>{{ $item->meaning }}</td>
+                         <td>{{ $item->meaning }}</td>
+                         <td>{{ $item->sher }}</td>
+                         <td>{{ $item->poet }}</td>
                          <td>{{ $item->link }}</td>
                          <td>
-                             <a href="{{ route('editlogo', $item->id) }}"> <button class="btn edit">Edit</button></a>
-                             <a href="{{ route('viewlogolist', $item->id) }}"> <button class="btn view">View</button></a>
+                             <a href="{{ route('editword', $item->id) }}"> <button class="btn edit">Edit</button></a>
+                             <a href="{{ route('viewword', $item->id) }}"> <button class="btn view">View</button></a>
 
-                             <form action="{{ route('deletelogo', $item->id) }}" method="POST" style="display:inline;">
+                             <form action="{{ route('deleteword', $item->id) }}" method="POST" style="display:inline;">
                                  @csrf
                                  @method('DELETE')
                                  <button type="submit" class="btn delete"
@@ -131,6 +133,6 @@
                  <!-- More rows dynamically here -->
              </tbody>
          </table>
-         {{ $logoitem->links() }}
+         {{ $wordoftheday->links() }}
      </div>
  @endsection

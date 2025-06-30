@@ -48,6 +48,8 @@ Route::get('/recommendedpoetsdata/json', [RecommendedpoetsController::class, 'ge
 Route::get('/bookslidedata/json', [BooksController::class, 'getdata'])->name('bookslidedata');
 Route::get('/logodata/json', [LogosController::class, 'getdata'])->name('logodata');
 Route::get('/navitemdata/json', [NavbaritemsController::class, 'getdata'])->name('navitemdata');
+Route::get('/worddata/json', [WordOfTheDayController::class, 'getdata'])->name('worddata');
+
 // search
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
@@ -165,6 +167,7 @@ Route::get('/wordlist', [WordOfTheDayController::class, 'index'])->name('wordlis
 Route::get('/editword/{id}', [WordOfTheDayController::class, 'edit'])->name('editword');
 Route::put('/updateword/{id}', [WordOfTheDayController::class, 'update'])->name('updateword');
 Route::delete('/deleteword/{id}', [WordOfTheDayController::class, 'destroy'])->name('deleteword');
-Route::get('/viewwordslist/{id}', [WordOfTheDayController::class, 'show'])->name('viewwordslist');
+Route::get('/viewword/{id}', [WordOfTheDayController::class, 'show'])->name('viewword');
+
 
 // });

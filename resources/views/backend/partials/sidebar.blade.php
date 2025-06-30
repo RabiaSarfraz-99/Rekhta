@@ -149,7 +149,7 @@
                       <span class="dropdown-arrow">▼</span>
                   </a>
                   <ul class="submenu">
-                      <li><a href="{{ route('bookslisting') }}">Words listing</a></li>
+                      <li><a href="{{ route('wordlist') }}">Words listing</a></li>
                       <li><a href="{{ route('addWord') }}">Add Word</a></li>
                   </ul>
               </li>
