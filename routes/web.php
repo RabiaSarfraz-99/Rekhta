@@ -13,6 +13,9 @@ use App\Http\Controllers\ShayaricollectionController;
 use App\Http\Controllers\TodaystopshayarisController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\LogosController;
+use App\Http\Controllers\NavbaritemsController;
+use App\Http\Controllers\WordOfTheDayController;
 
 Route::get('/', function () {
     return view('home');
@@ -43,94 +46,125 @@ Route::get('/poetrycollectiondata/json', [PoetrycollectionController::class, 'ge
 Route::get('/shayaricollectiondata/json', [ShayaricollectionController::class, 'getdata'])->name('shayaricollectiondata');
 Route::get('/recommendedpoetsdata/json', [RecommendedpoetsController::class, 'getdata'])->name('recommendedpoetsdata');
 Route::get('/bookslidedata/json', [BooksController::class, 'getdata'])->name('bookslidedata');
+Route::get('/logodata/json', [LogosController::class, 'getdata'])->name('logodata');
+Route::get('/navitemdata/json', [NavbaritemsController::class, 'getdata'])->name('navitemdata');
 // search
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('backend.statics');
-    })->name('dashboard');
+// Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+Route::get('/dashboard', function () {
+    return view('backend.statics');
+})->name('dashboard');
 
 
-    Route::get('/addheroslide', [HerosliderController::class, 'create'])->name('addheroslide');
-    Route::get('/heroslide', [HerosliderController::class, 'index'])->name('herolisting');
-    Route::post('/heroslidelist', [HerosliderController::class, 'store'])->name('heroslides');
-    Route::get('/editheroslide/{id}', [HerosliderController::class, 'edit'])->name('editheroslide');
-    Route::get('/heroslide/view/{id}', [HeroSliderController::class, 'show'])->name('viewheroslide');
-    Route::put('/updateheroslide/{id}', [HerosliderController::class, 'update'])->name('updateheroslide');
-    Route::delete('/deleteheroslide/{id}', [HerosliderController::class, 'destroy'])->name('deleteheroslide');
-
-
-
-    // Today's Top Shayari
-    Route::get('/addtopShayari', [TodaystopshayarisController::class, 'create'])->name('addtopShayari');
-    Route::post('/topshayarilist', [TodaystopshayarisController::class, 'store'])->name('topshayari');
-    Route::get('/learnmorelisting', [TodaystopshayarisController::class, 'index'])->name('topshayarilisting');
-    Route::get('/edittopshayari/{id}', [TodaystopshayarisController::class, 'edit'])->name('editshayari');
-    Route::put('/updatetopshayaris/{id}', [TodaystopshayarisController::class, 'update'])->name('updatetopshayari');
-    Route::delete('/deletetopshayari/{id}', [TodaystopshayarisController::class, 'destroy'])->name('deletetopshayari');
-    Route::get('/viewtopshayari/{id}', [TodaystopshayarisController::class, 'show'])->name('viewtopshayari');
-
-
-    // More FRom Rekhta
-    Route::get('/addtomore', [LearmoreslidesController::class, 'create'])->name('addtomore');
-    Route::post('/learnmorelist', [LearmoreslidesController::class, 'store'])->name('learnmore');
-    Route::get('/learnmorelist', [LearmoreslidesController::class, 'index'])->name('learnmorelisting');
-    Route::get('/edittolearnmore/{id}', [LearmoreslidesController::class, 'edit'])->name('editlearnmore');
-    Route::put('/updatelearnmore/{id}', [LearmoreslidesController::class, 'update'])->name('updatelearnmore');
-    Route::delete('/deletelearnmore/{id}', [LearmoreslidesController::class, 'destroy'])->name('deletelearnmore');
-    Route::get('/viewlearnmorelist/{id}', [LearmoreslidesController::class, 'show'])->name('viewmorelist');
+Route::get('/addheroslide', [HerosliderController::class, 'create'])->name('addheroslide');
+Route::get('/heroslide', [HerosliderController::class, 'index'])->name('herolisting');
+Route::post('/heroslidelist', [HerosliderController::class, 'store'])->name('heroslides');
+Route::get('/editheroslide/{id}', [HerosliderController::class, 'edit'])->name('editheroslide');
+Route::get('/heroslide/view/{id}', [HeroSliderController::class, 'show'])->name('viewheroslide');
+Route::put('/updateheroslide/{id}', [HerosliderController::class, 'update'])->name('updateheroslide');
+Route::delete('/deleteheroslide/{id}', [HerosliderController::class, 'destroy'])->name('deleteheroslide');
 
 
 
-
-    // Library books 
-    Route::get('/addlibrarybook', [LibrarybooksController::class, 'create'])->name('addlibrarybook');
-    Route::post('/librarybooklist', [LibrarybooksController::class, 'store'])->name('librarybook');
-    Route::get('/librarybooklist', [LibrarybooksController::class, 'index'])->name('librarybooklisting');
-    Route::get('/edittolibrarybook/{id}', [LibrarybooksController::class, 'edit'])->name('editlibrarybook');
-    Route::put('/updatelibrarybook/{id}', [LibrarybooksController::class, 'update'])->name('updatelibrarybook');
-    Route::delete('/deletelibrarybook/{id}', [LibrarybooksController::class, 'destroy'])->name('deletelibrarybook');
-    Route::get('/viewlibrarybooklist/{id}', [LibrarybooksController::class, 'show'])->name('viewbookslist');
-    // Poetrycollection
-
-    Route::get('/addpoetrycollection', [PoetrycollectionController::class, 'create'])->name('addpoetrycollection');
-    Route::get('/showpoetrycollection/{id}', [PoetrycollectionController::class, 'show'])->name('showpoetrycollection');
-    Route::get('/poetrycollection', [PoetrycollectionController::class, 'index'])->name('poetrycollectionlisting');
-    Route::post('/poetrycollectionlist', [PoetrycollectionController::class, 'store'])->name('poetrycollections');
-    Route::get('/editpoetrycollection/{id}', [PoetrycollectionController::class, 'edit'])->name('editpoetrycollection');
-    Route::put('/updatepoetrycollection/{id}', [PoetrycollectionController::class, 'update'])->name('updatepoetrycollection');
-    Route::delete('/deletepoetrycollection/{id}', [PoetrycollectionController::class, 'destroy'])->name('deletepoetrycollection');
+// Today's Top Shayari
+Route::get('/addtopShayari', [TodaystopshayarisController::class, 'create'])->name('addtopShayari');
+Route::post('/topshayarilist', [TodaystopshayarisController::class, 'store'])->name('topshayari');
+Route::get('/learnmorelisting', [TodaystopshayarisController::class, 'index'])->name('topshayarilisting');
+Route::get('/edittopshayari/{id}', [TodaystopshayarisController::class, 'edit'])->name('editshayari');
+Route::put('/updatetopshayaris/{id}', [TodaystopshayarisController::class, 'update'])->name('updatetopshayari');
+Route::delete('/deletetopshayari/{id}', [TodaystopshayarisController::class, 'destroy'])->name('deletetopshayari');
+Route::get('/viewtopshayari/{id}', [TodaystopshayarisController::class, 'show'])->name('viewtopshayari');
 
 
-    // Shayaricollection
+// More FRom Rekhta
+Route::get('/addtomore', [LearmoreslidesController::class, 'create'])->name('addtomore');
+Route::post('/learnmorelist', [LearmoreslidesController::class, 'store'])->name('learnmore');
+Route::get('/learnmorelist', [LearmoreslidesController::class, 'index'])->name('learnmorelisting');
+Route::get('/edittolearnmore/{id}', [LearmoreslidesController::class, 'edit'])->name('editlearnmore');
+Route::put('/updatelearnmore/{id}', [LearmoreslidesController::class, 'update'])->name('updatelearnmore');
+Route::delete('/deletelearnmore/{id}', [LearmoreslidesController::class, 'destroy'])->name('deletelearnmore');
+Route::get('/viewlearnmorelist/{id}', [LearmoreslidesController::class, 'show'])->name('viewmorelist');
 
-    Route::get('/addshayaricollection', [ShayaricollectionController::class, 'create'])->name('addshayaricollection');
-    Route::get('/shayaricollection', [ShayaricollectionController::class, 'index'])->name('shayaricollectionlisting');
-    Route::post('/shayaricollectionlist', [ShayaricollectionController::class, 'store'])->name('shayaricollections');
-    Route::get('/shayaricollection/{id}', [ShayaricollectionController::class, 'show'])->name('shayaricollection');
-    Route::get('/editshayaricollection/{id}', [ShayaricollectionController::class, 'edit'])->name('editshayaricollection');
 
-    Route::put('/updateshayaricollection/{id}', [ShayaricollectionController::class, 'update'])->name('updateshayaricollection');
-    Route::delete('/deleteshayaricollection/{id}', [ShayaricollectionController::class, 'destroy'])->name('deleteshayaricollection');
 
-    // recommendedpoets
 
-    Route::get('/addrecommendedpoets', [RecommendedpoetsController::class, 'create'])->name('addrecommendedpoets');
-    Route::get('/recommendedpoets', [RecommendedpoetsController::class, 'index'])->name('recommendedpoetslisting');
-    Route::post('/recommendedpoetslist', [RecommendedpoetsController::class, 'store'])->name('recommendedpoets');
-    Route::get('/recommendedpoet/{id}', [RecommendedpoetsController::class, 'show'])->name('recommendedpoet');
-    Route::get('/editrecommendedpoets/{id}', [RecommendedpoetsController::class, 'edit'])->name('editrecommendedpoets');
-    Route::put('/updaterecommendedpoets/{id}', [RecommendedpoetsController::class, 'update'])->name('updaterecommendedpoets');
-    Route::delete('/deleterecommendedpoets/{id}', [RecommendedpoetsController::class, 'destroy'])->name('deleterecommendedpoets');
+// Library books 
+Route::get('/addlibrarybook', [LibrarybooksController::class, 'create'])->name('addlibrarybook');
+Route::post('/librarybooklist', [LibrarybooksController::class, 'store'])->name('librarybook');
+Route::get('/librarybooklist', [LibrarybooksController::class, 'index'])->name('librarybooklisting');
+Route::get('/edittolibrarybook/{id}', [LibrarybooksController::class, 'edit'])->name('editlibrarybook');
+Route::put('/updatelibrarybook/{id}', [LibrarybooksController::class, 'update'])->name('updatelibrarybook');
+Route::delete('/deletelibrarybook/{id}', [LibrarybooksController::class, 'destroy'])->name('deletelibrarybook');
+Route::get('/viewlibrarybooklist/{id}', [LibrarybooksController::class, 'show'])->name('viewbookslist');
+// Poetrycollection
 
-    // books
+Route::get('/addpoetrycollection', [PoetrycollectionController::class, 'create'])->name('addpoetrycollection');
+Route::get('/showpoetrycollection/{id}', [PoetrycollectionController::class, 'show'])->name('showpoetrycollection');
+Route::get('/poetrycollection', [PoetrycollectionController::class, 'index'])->name('poetrycollectionlisting');
+Route::post('/poetrycollectionlist', [PoetrycollectionController::class, 'store'])->name('poetrycollections');
+Route::get('/editpoetrycollection/{id}', [PoetrycollectionController::class, 'edit'])->name('editpoetrycollection');
+Route::put('/updatepoetrycollection/{id}', [PoetrycollectionController::class, 'update'])->name('updatepoetrycollection');
+Route::delete('/deletepoetrycollection/{id}', [PoetrycollectionController::class, 'destroy'])->name('deletepoetrycollection');
 
-    Route::get('/addbooks', [BooksController::class, 'create'])->name('addbooks');
-    Route::get('/books', [BooksController::class, 'index'])->name('bookslisting');
-    Route::post('/bookslist', [BooksController::class, 'store'])->name('books');
-    Route::get('/book/{id}', [BooksController::class, 'show'])->name('book');
-    Route::get('/editbooks/{id}', [BooksController::class, 'edit'])->name('editbooks');
-    Route::put('/updatebooks/{id}', [BooksController::class, 'update'])->name('updatebooks');
-    Route::delete('/deletebooks/{id}', [BooksController::class, 'destroy'])->name('deletebooks');
-});
+
+// Shayaricollection
+
+Route::get('/addshayaricollection', [ShayaricollectionController::class, 'create'])->name('addshayaricollection');
+Route::get('/shayaricollection', [ShayaricollectionController::class, 'index'])->name('shayaricollectionlisting');
+Route::post('/shayaricollectionlist', [ShayaricollectionController::class, 'store'])->name('shayaricollections');
+Route::get('/shayaricollection/{id}', [ShayaricollectionController::class, 'show'])->name('shayaricollection');
+Route::get('/editshayaricollection/{id}', [ShayaricollectionController::class, 'edit'])->name('editshayaricollection');
+
+Route::put('/updateshayaricollection/{id}', [ShayaricollectionController::class, 'update'])->name('updateshayaricollection');
+Route::delete('/deleteshayaricollection/{id}', [ShayaricollectionController::class, 'destroy'])->name('deleteshayaricollection');
+
+// recommendedpoets
+
+Route::get('/addrecommendedpoets', [RecommendedpoetsController::class, 'create'])->name('addrecommendedpoets');
+Route::get('/recommendedpoets', [RecommendedpoetsController::class, 'index'])->name('recommendedpoetslisting');
+Route::post('/recommendedpoetslist', [RecommendedpoetsController::class, 'store'])->name('recommendedpoets');
+Route::get('/recommendedpoet/{id}', [RecommendedpoetsController::class, 'show'])->name('recommendedpoet');
+Route::get('/editrecommendedpoets/{id}', [RecommendedpoetsController::class, 'edit'])->name('editrecommendedpoets');
+Route::put('/updaterecommendedpoets/{id}', [RecommendedpoetsController::class, 'update'])->name('updaterecommendedpoets');
+Route::delete('/deleterecommendedpoets/{id}', [RecommendedpoetsController::class, 'destroy'])->name('deleterecommendedpoets');
+
+// books
+
+Route::get('/addbooks', [BooksController::class, 'create'])->name('addbooks');
+Route::get('/books', [BooksController::class, 'index'])->name('bookslisting');
+Route::post('/bookslist', [BooksController::class, 'store'])->name('books');
+Route::get('/book/{id}', [BooksController::class, 'show'])->name('book');
+Route::get('/editbooks/{id}', [BooksController::class, 'edit'])->name('editbooks');
+Route::put('/updatebooks/{id}', [BooksController::class, 'update'])->name('updatebooks');
+Route::delete('/deletebooks/{id}', [BooksController::class, 'destroy'])->name('deletebooks');
+
+// navbar routes
+Route::get('/addtonavbar', [NavbaritemsController::class, 'create'])->name('addnavbar');
+Route::post('/navbar', [NavbaritemsController::class, 'store'])->name('navbar');
+Route::get('/navbarlist', [NavbaritemsController::class, 'index'])->name('navbarlist');
+Route::get('/editnavbar/{id}', [NavbaritemsController::class, 'edit'])->name('editnavbar');
+Route::put('/updatenavbar/{id}', [NavbaritemsController::class, 'update'])->name('updatenavbar');
+Route::delete('/deletenav/{id}', [NavbaritemsController::class, 'destroy'])->name('deletenav');
+Route::get('/viewnavlist/{id}', [NavbaritemsController::class, 'show'])->name('viewnavlist');
+
+// logo routes
+Route::get('/addlogo', [LogosController::class, 'create'])->name('addlogo');
+Route::post('/logo', [LogosController::class, 'store'])->name('logo');
+Route::get('/logolist', [LogosController::class, 'index'])->name('logolist');
+Route::get('/editlogo/{id}', [LogosController::class, 'edit'])->name('editlogo');
+Route::put('/updatelogo/{id}', [LogosController::class, 'update'])->name('updatelogo');
+Route::delete('/deletelogo/{id}', [LogosController::class, 'destroy'])->name('deletelogo');
+Route::get('/viewlogolist/{id}', [LogosController::class, 'show'])->name('viewlogolist');
+
+
+// Word of the Day routes
+Route::get('/addWord', [WordOfTheDayController::class, 'create'])->name('addWord');
+Route::post('/Wordoftheday', [WordOfTheDayController::class, 'store'])->name('Wordoftheday');
+Route::get('/wordlist', [WordOfTheDayController::class, 'index'])->name('wordlist');
+Route::get('/editword/{id}', [WordOfTheDayController::class, 'edit'])->name('editword');
+Route::put('/updateword/{id}', [WordOfTheDayController::class, 'update'])->name('updateword');
+Route::delete('/deleteword/{id}', [WordOfTheDayController::class, 'destroy'])->name('deleteword');
+Route::get('/viewwordslist/{id}', [WordOfTheDayController::class, 'show'])->name('viewwordslist');
+
+// });

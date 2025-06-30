@@ -2,210 +2,220 @@
 @section('title', 'Urdu Poetry, Urdu Shayari of Famous Poets - Rekhta')
 
 @section('content')
-<style>
-    .book-container{
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 auto;
-        justify-content: center;
-        align-items: center;
-        width: 1000px;
-        margin-bottom: 20px;
-    }
+    <style>
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
+            width: 1000px;
+            margin-bottom: 20px;
+        }
 
-    .result-container {
-        text-align: center;
-    }
+        .result-container {
+            text-align: center;
+        }
 
-    .result-container>h1 {
-        font-size: 40px;
-        font-weight: bolder;
-        margin-bottom: 50px;
-    }
+        .result-container>h1 {
+            font-size: 40px;
+            font-weight: bolder;
+            margin-bottom: 50px;
+            padding-top: 115px;
+        }
 
-    h5 {
-        margin-bottom: 20px;
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .poetry-collection-card{
-        margin-inline: 10px;
-    }
- 
-</style>
-<div class="container">
+        h5 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-   @include('navbar')
-    <!-- search results -->
+        .poetry-collection-card {
+            margin-inline: 10px;
+        }
+    </style>
+    <div class="container">
 
-    @if($query)
-    <div class="result-container">
-        <h1>Search Results for "{{ $query }}"</h1>
-        <h5>Librarybooks</h5>
-        <div class="book-container">
-            @foreach($books as $book)
-            <div class="book-slide">
-                <a href="{{ $book->link }}" target="_blank">
-                    {{-- Image --}}
-                    <img
-                        src="{{ asset('assets/uploades/books/' . ($book->image ?? 'default.png')) }}"
-                        alt="{{ $book->title ?? 'Book Cover' }}" />
-
-                    {{-- Book details --}}
-                    <div class="book-detail">
-                        {{-- Title with link --}}
-                        <p class="bookTitle">
-                            <a
-                                target="_blank"
-                                title="{{ $book->title }}"
-                                href="{{ $book->link }}">
-                                {{ $book->title }}
-                            </a>
-                        </p>
-
-                        {{-- Author --}}
-                        <p class="bookTitle overflow">
-                            {{ $book->author }}
-                        </p>
-
-                        {{-- Rating --}}
-                        <p class="bookRating">
-                            {{ $book->rating ?? '' }}
-                        </p>
-                    </div>
-                </a>
-            </div>
-            @endforeach
-        </div>
+        @include('navbar')
+        <!-- search results -->
 
 
-
-        {{-- Orders --}}
-        <h5>Poetrycollections</h5>
-        <div class="book-container">
-            @foreach($poetrycollections as $card)
-            <div class="poetry-collection-card">
-                <a href="{{ $card->url }}" title="{{ $card->title }}" aria-label="{{ $card->title }}">
-                    <div class="poetry-collection-card-content">
-
-                        {{-- Image Section --}}
-                        <div class="poetry-collection-card-img">
-                            <img
-                                src="{{ asset('assets/uploades/poetrycollection/'. ($card->image ?? 'default.png')) }}"
-                                alt="{{ $card->title }}"
-                                width="259"
-                                height="210" />
-                        </div>
-
-                        {{-- Title --}}
-                        <h3>{{ $card->title }}<span class="HeadingFade"></span></h3>
-                    </div>
-                </a>
-            </div>
-            @endforeach
-        </div>
-
-        {{-- poetrycollections --}}
-        <h5>Poetrycollections</h5>
-        <div class="book-container">
-            @foreach($librarybooks as $book)
-            @php
-            $image = $book->image ?? 'default.png';
-            @endphp
-
-            <div class="book-card">
-                <div class="card-content">
-                    {{-- Background Image --}}
-                    <div class="backg-image" style="background-image: url('{{ asset('assets/uploades/librarybook/' . $image) }}');"></div>
-
-                    {{-- Book Text --}}
-                    <div class="card-txt">
-                        {{-- Title --}}
-                        <p class="b-title" @if(empty($book->title)) style="visibility: hidden;" @endif>
-                            {{ $book->title }}
-                        </p>
-
-                        {{-- Author --}}
-                        <p class="b-author" @if(empty($book->author)) style="visibility: hidden;" @endif>
-                            {{ $book->author }}
-                        </p>
-
-                        {{-- Year & Category --}}
-                        <div class="book-info">
-                            <p class="year" @if(empty($book->year)) style="visibility: hidden;" @endif>
-                                {{ $book->year }}
-                            </p>
-
-                            <p class="category" @if(empty($book->catagory)) style="visibility: hidden;" @endif>
-                                {{ $book->catagory }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-
+        <div class="result-container">
+            @if ($books->isEmpty() && $poetrycollections->isEmpty() && $librarybooks->isEmpty())
+                <h1>No Search Results Found for "{{ $query }}"</h1>
+            @else
+                <h1>Search Results for "{{ $query }}"</h1>
             @endif
+            @if ($query)
+                <h5>Librarybooks</h5>
+                <div class="book-container">
+                    @foreach ($books as $book)
+                        <div class="book-slide">
+                            <a href="{{ $book->link }}" target="_blank">
+                                {{-- Image --}}
+                                <img src="{{ asset('assets/uploades/books/' . ($book->image ?? 'default.png')) }}"
+                                    alt="{{ $book->title ?? 'Book Cover' }}" />
+
+                                {{-- Book details --}}
+                                <div class="book-detail">
+                                    {{-- Title with link --}}
+                                    <p class="bookTitle">
+                                        <a target="_blank" title="{{ $book->title }}" href="{{ $book->link }}">
+                                            {{ $book->title }}
+                                        </a>
+                                    </p>
+
+                                    {{-- Author --}}
+                                    <p class="bookTitle overflow">
+                                        {{ $book->author }}
+                                    </p>
+
+                                    {{-- Rating --}}
+                                    <p class="bookRating">
+                                        {{ $book->rating ?? '' }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+
+
+                {{-- Orders --}}
+                @if ($poetrycollections->isNotEmpty())
+                    <h5>Poetrycollections</h5>
+                    <div class="book-container">
+                        @foreach ($poetrycollections as $card)
+                            <div class="poetry-collection-card">
+                                <a href="{{ $card->url }}" title="{{ $card->title }}"
+                                    aria-label="{{ $card->title }}">
+                                    <div class="poetry-collection-card-content">
+
+                                        {{-- Image Section --}}
+                                        <div class="poetry-collection-card-img">
+                                            <img src="{{ asset('assets/uploades/poetrycollection/' . ($card->image ?? 'default.png')) }}"
+                                                alt="{{ $card->title }}" width="259" height="210" />
+                                        </div>
+
+                                        {{-- Title --}}
+                                        <h3>{{ $card->title }}<span class="HeadingFade"></span></h3>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                @if ($librarybooks->isNotEmpty())
+                    {{-- poetrycollections --}}
+                    <h5>books collections</h5>
+                    <div class="book-container">
+                        @foreach ($librarybooks as $book)
+                            @php
+                                $image = $book->image ?? 'default.png';
+                            @endphp
+
+                            <div class="book-card">
+                                <div class="card-content">
+                                    {{-- Background Image --}}
+                                    <div class="backg-image"
+                                        style="background-image: url('{{ asset('assets/uploades/librarybook/' . $image) }}');">
+                                    </div>
+
+                                    {{-- Book Text --}}
+                                    <div class="card-txt">
+                                        {{-- Title --}}
+                                        <p class="b-title"
+                                            @if (empty($book->title)) style="visibility: hidden;" @endif>
+                                            {{ $book->title }}
+                                        </p>
+
+                                        {{-- Author --}}
+                                        <p class="b-author"
+                                            @if (empty($book->author)) style="visibility: hidden;" @endif>
+                                            {{ $book->author }}
+                                        </p>
+
+                                        {{-- Year & Category --}}
+                                        <div class="book-info">
+                                            <p class="year"
+                                                @if (empty($book->year)) style="visibility: hidden;" @endif>
+                                                {{ $book->year }}
+                                            </p>
+
+                                            <p class="category"
+                                                @if (empty($book->catagory)) style="visibility: hidden;" @endif>
+                                                {{ $book->catagory }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                @endif
 
         </div>
+        @endif
     </div>
     <!-- poetry-collection -->
     <!-- <div class="poetry-collection">
-        <h2 class="poetry-collection-Heading">URDU POETRY COLLECTION</h2>
-        <div class="poetry-collection-wrapper slider"></div>
+                    <h2 class="poetry-collection-Heading">URDU POETRY COLLECTION</h2>
+                    <div class="poetry-collection-wrapper slider"></div>
 
-        <p class="sectionTagLine">
-            Compilation of top 20 hand-picked Urdu shayari on the most
-            sought-after subjects and poets
-        </p>
-        <div class="readFullBgBtn">
-            <a
-                class="readFull"
-                title="See full collection"
-                aria-label="See full collection"
-                href="/top-20?wref=rweb"
-                onclick="javascript:pageTracker._trackPageview('hometop20');">See full collection</a>
-        </div>
-    </div> -->
+                    <p class="sectionTagLine">
+                        Compilation of top 20 hand-picked Urdu shayari on the most
+                        sought-after subjects and poets
+                    </p>
+                    <div class="readFullBgBtn">
+                        <a
+                            class="readFull"
+                            title="See full collection"
+                            aria-label="See full collection"
+                            href="/top-20?wref=rweb"
+                            onclick="javascript:pageTracker._trackPageview('hometop20');">See full collection</a>
+                    </div>
+                </div> -->
 
 
     <!-- book -->
     <!-- <div class="booksection">
-        <div class="buyRekhtaBooksSection">
-            <h2 class="booksectionHeading">BUY HINDI &amp; URDU BOOKS</h2>
+                    <div class="buyRekhtaBooksSection">
+                        <h2 class="booksectionHeading">BUY HINDI &amp; URDU BOOKS</h2>
 
-            <div class="book-slider" data-url="{{ route('bookslidedata') }}"></div>
-            <div class="booksection-bottom">
-                <p class="booksectionTagLine">
-                    Get latest Urdu books &amp; Hindi books online only on
-                    Rekhtabooks.com
-                </p>
-                <a
-                    class="booksection-readFull"
-                    title="Browse Rekhtabooks.com"
-                    aria-label="Browse Rekhtabooks.com"
-                    target="_blank"
-                    href="https://rekhtabooks.com/?ref=rekhta&amp;cid=mc">Browse Rekhtabooks.com</a>
-            </div>
-        </div>
-    </div> -->
+                        <div class="book-slider" data-url="{{ route('bookslidedata') }}"></div>
+                        <div class="booksection-bottom">
+                            <p class="booksectionTagLine">
+                                Get latest Urdu books &amp; Hindi books online only on
+                                Rekhtabooks.com
+                            </p>
+                            <a
+                                class="booksection-readFull"
+                                title="Browse Rekhtabooks.com"
+                                aria-label="Browse Rekhtabooks.com"
+                                target="_blank"
+                                href="https://rekhtabooks.com/?ref=rekhta&amp;cid=mc">Browse Rekhtabooks.com</a>
+                        </div>
+                    </div>
+                </div> -->
 
     <!-- E-books Library -->
     <!-- <section class="e-books-library">
-        <div class="library-content">
-            <div class="library-heading">
-                <h2>E-BOOKS LIBRARY</h2>
-                <div class="library-cards"></div>
-                <div class="library-tagline">
-                    <p>
-                        Discover books & magazines in the world’s largest online
-                        collection of Urdu literature
-                    </p>
-                    <a href="">VIEW MORE E-BOOKS</a>
-                </div>
-            </div>
-        </div>
-    </section> -->
+                    <div class="library-content">
+                        <div class="library-heading">
+                            <h2>E-BOOKS LIBRARY</h2>
+                            <div class="library-cards"></div>
+                            <div class="library-tagline">
+                                <p>
+                                    Discover books & magazines in the world’s largest online
+                                    collection of Urdu literature
+                                </p>
+                                <a href="">VIEW MORE E-BOOKS</a>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
 
 
     <footer class="rekhta-footer">
@@ -295,19 +305,19 @@
             <p>© 2025 Rekhta™ Foundation. All rights reserved.</p>
         </div>
     </footer>
-</div>
+    </div>
 
 
-<script>
-    const herosliderdata = "{{route('herosliderdata')}}";
-    const topshayaridata = "{{route('topshayaridata')}}";
-    const learnmoredata = "{{route('learnmoredata')}}";
-    const librarybookdata = "{{route('librarybookdata')}}";
-    const poetrycollectiondata = "{{route('poetrycollectiondata')}}";
-    const shayaricollectiondata = "{{route('shayaricollectiondata')}}";
-    const recommendedpoetsdata = "{{route('recommendedpoetsdata')}}";
-    const bookslidedata = "{{route('bookslidedata')}}";
-</script>
+    <script>
+        const herosliderdata = "{{ route('herosliderdata') }}";
+        const topshayaridata = "{{ route('topshayaridata') }}";
+        const learnmoredata = "{{ route('learnmoredata') }}";
+        const librarybookdata = "{{ route('librarybookdata') }}";
+        const poetrycollectiondata = "{{ route('poetrycollectiondata') }}";
+        const shayaricollectiondata = "{{ route('shayaricollectiondata') }}";
+        const recommendedpoetsdata = "{{ route('recommendedpoetsdata') }}";
+        const bookslidedata = "{{ route('bookslidedata') }}";
+    </script>
 
 
 @endsection

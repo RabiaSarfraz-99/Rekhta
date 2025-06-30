@@ -31,7 +31,28 @@
                       <span class="nav-text">Analytics</span>
                   </a>
               </li>
-
+              <li class="nav-item">
+                  <a href="#" class="nav-link toggle-dropdown">
+                      <span class="nav-icon">📈</span>
+                      <span class="nav-text">Change Logo</span>
+                      <span class="dropdown-arrow">▼</span>
+                  </a>
+                  <ul class="submenu">
+                      <li><a href="{{ route('addlogo') }}">Add Logo</a></li>
+                      <li><a href="{{ route('logolist') }}">View Logo</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link toggle-dropdown">
+                      <span class="nav-icon">📈</span>
+                      <span class="nav-text">NavBar</span>
+                      <span class="dropdown-arrow">▼</span>
+                  </a>
+                  <ul class="submenu">
+                      <li><a href="{{ route('addnavbar') }}">Add to Navbar</a></li>
+                      <li><a href="{{ route('navbarlist') }}">View List</a></li>
+                  </ul>
+              </li>
               <li class="nav-item">
                   <a href="#" class="nav-link toggle-dropdown">
                       <span class="nav-icon">📈</span>
@@ -39,8 +60,8 @@
                       <span class="dropdown-arrow">▼</span>
                   </a>
                   <ul class="submenu">
-                      <li><a href="{{ route ('addheroslide') }}">Add slide</a></li>
-                      <li><a href="{{ route ('herolisting') }}">View Slides</a></li>
+                      <li><a href="{{ route('addheroslide') }}">Add slide</a></li>
+                      <li><a href="{{ route('herolisting') }}">View Slides</a></li>
                   </ul>
               </li>
               <li class="nav-item">
@@ -84,8 +105,8 @@
                       <span class="dropdown-arrow">▼</span>
                   </a>
                   <ul class="submenu">
-                      <li><a href="{{ route ('poetrycollectionlisting') }}">Poetry Collection listing</a></li>
-                      <li><a href="{{ route ('addpoetrycollection') }}">Add Poetry Collection</a></li>
+                      <li><a href="{{ route('poetrycollectionlisting') }}">Poetry Collection listing</a></li>
+                      <li><a href="{{ route('addpoetrycollection') }}">Add Poetry Collection</a></li>
                   </ul>
               </li>
               <li class="nav-item">
@@ -95,8 +116,8 @@
                       <span class="dropdown-arrow">▼</span>
                   </a>
                   <ul class="submenu">
-                      <li><a href="{{ route ('shayaricollectionlisting') }}">Shayari Collection listing</a></li>
-                      <li><a href="{{ route ('addshayaricollection') }}">Add Shayari Collection</a></li>
+                      <li><a href="{{ route('shayaricollectionlisting') }}">Shayari Collection listing</a></li>
+                      <li><a href="{{ route('addshayaricollection') }}">Add Shayari Collection</a></li>
                   </ul>
               </li>
               <li class="nav-item">
@@ -106,11 +127,9 @@
                       <span class="dropdown-arrow">▼</span>
                   </a>
                   <ul class="submenu">
-                      <li><a href="{{ route ('recommendedpoetslisting') }}">Recommended Poets listing</a></li>
-                      <li><a href="{{ route ('addrecommendedpoets') }}">Add Recommended Poets</a></li>
+                      <li><a href="{{ route('recommendedpoetslisting') }}">Recommended Poets listing</a></li>
+                      <li><a href="{{ route('addrecommendedpoets') }}">Add Recommended Poets</a></li>
                   </ul>
-              </li>
-
               </li>
               <li class="nav-item">
                   <a href="#" class="nav-link toggle-dropdown">
@@ -119,8 +138,19 @@
                       <span class="dropdown-arrow">▼</span>
                   </a>
                   <ul class="submenu">
-                      <li><a href="{{ route ('bookslisting') }}">Books listing</a></li>
-                      <li><a href="{{ route ('addbooks') }}">Add Books</a></li>
+                      <li><a href="{{ route('bookslisting') }}">Books listing</a></li>
+                      <li><a href="{{ route('addbooks') }}">Add Books</a></li>
+                  </ul>
+              </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link toggle-dropdown">
+                      <span class="nav-icon">📈</span>
+                      <span class="nav-text">Word of the Day</span>
+                      <span class="dropdown-arrow">▼</span>
+                  </a>
+                  <ul class="submenu">
+                      <li><a href="{{ route('bookslisting') }}">Words listing</a></li>
+                      <li><a href="{{ route('addWord') }}">Add Word</a></li>
                   </ul>
               </li>
               <li class="nav-item">
