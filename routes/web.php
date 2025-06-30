@@ -3,9 +3,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\LogosController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\HerosliderController;
+use App\Http\Controllers\NavbaritemsController;
 use App\Http\Controllers\LibrarybooksController;
+use App\Http\Controllers\WordOfTheDayController;
+use App\Http\Controllers\FeaturedVideoController;
 use App\Http\Controllers\LearmoreslidesController;
 use App\Http\Controllers\PoetrycollectionController;
 use App\Http\Controllers\RecommendedpoetsController;
@@ -13,9 +17,6 @@ use App\Http\Controllers\ShayaricollectionController;
 use App\Http\Controllers\TodaystopshayarisController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\LogosController;
-use App\Http\Controllers\NavbaritemsController;
-use App\Http\Controllers\WordOfTheDayController;
 
 Route::get('/', function () {
     return view('home');
@@ -128,6 +129,8 @@ Route::get('/recommendedpoet/{id}', [RecommendedpoetsController::class, 'show'])
 Route::get('/editrecommendedpoets/{id}', [RecommendedpoetsController::class, 'edit'])->name('editrecommendedpoets');
 Route::put('/updaterecommendedpoets/{id}', [RecommendedpoetsController::class, 'update'])->name('updaterecommendedpoets');
 Route::delete('/deleterecommendedpoets/{id}', [RecommendedpoetsController::class, 'destroy'])->name('deleterecommendedpoets');
+// featured-videos
+Route::resource('featured-videos', FeaturedVideoController::class);
 
 // books
 

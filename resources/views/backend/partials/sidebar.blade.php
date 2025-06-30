@@ -131,6 +131,17 @@
                       <li><a href="{{ route('addrecommendedpoets') }}">Add Recommended Poets</a></li>
                   </ul>
               </li>
+                 <li class="nav-item">
+                  <a href="#" class="nav-link toggle-dropdown">
+                      <span class="nav-icon">📈</span>
+                      <span class="nav-text">FeaturedVideo</span>
+                      <span class="dropdown-arrow">▼</span>
+                  </a>
+                  <ul class="submenu">
+                      <li><a href="{{ route('recommendedpoetslisting') }}">FeaturedVideo FeaturedVideo</a></li>
+                      <li><a href="{{ route('addrecommendedpoets') }}">Add FeaturedVideo</a></li>
+                  </ul>
+              </li>
               <li class="nav-item">
                   <a href="#" class="nav-link toggle-dropdown">
                       <span class="nav-icon">📈</span>

@@ -12,5 +12,6 @@ class Todaystopshayaris extends Model
         'shayari',
         'poet',
         'link',
+        'sequence',
     ];
 }

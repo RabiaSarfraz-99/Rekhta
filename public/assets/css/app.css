@@ -42,7 +42,6 @@ body {
     /* width: 54%; */
 }
 
-
 .logo {
     width: 134px;
     margin-left: 36px;
@@ -53,45 +52,45 @@ body {
     height: auto;
 }
 .navbar ul {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
 }
 .navbar {
-  text-align: left !important;
+    text-align: left !important;
 }
 .navbar ul li {
-  list-style: none;
-  padding: 28px 0 22px;
-  font-size: 14px;
-  font-family: "Lato";
-  font-weight: bold;
-  position: relative;
+    list-style: none;
+    padding: 28px 0 22px;
+    font-size: 14px;
+    font-family: "Lato";
+    font-weight: bold;
+    position: relative;
 }
 .navbar ul li a {
-  color: black;
-  text-decoration: none;
-  padding: 0 12px;
-  text-transform: uppercase;
+    color: black;
+    text-decoration: none;
+    padding: 0 12px;
+    text-transform: uppercase;
 }
 
 .navbar > ul > li::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  width: 100%;
-  height: 4px;
-  background-color: red;
-  transition: transform 0.3s ease;
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    width: 100%;
+    height: 4px;
+    background-color: red;
+    transition: transform 0.3s ease;
 }
 
 .navbar > ul > li:hover::after {
-  transform: translateX(-50%) scaleX(1);
+    transform: translateX(-50%) scaleX(1);
 }
 /* .subMenu {
   vertical-align: middle;
@@ -103,35 +102,35 @@ body {
   display: none;
 } */
 .MoreMenuBtn ul {
-  display: none;
-  position: absolute;
-  top: 90%;
-  left: 0;
-  background-color: white;
-  white-space: nowrap;
+    display: none;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    background-color: white;
+    white-space: nowrap;
 }
 .MoreMenuBtn ul li {
-  list-style: none;
-  padding: 12px 24px;
-  font-size: 14px;
-  font-family: "Lato";
-  font-weight: bold;
+    list-style: none;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-family: "Lato";
+    font-weight: bold;
 }
 .MoreMenuBtn ul li a {
-  color: black;
-  text-decoration: none;
-  padding: 0 12px;
+    color: black;
+    text-decoration: none;
+    padding: 0 12px;
 }
 /* .MoreMenuBtn:hover ul {
   display: block;
 } */
 .MoreMenuBtn ul li:hover {
-  background-color: #f3f3f3;
+    background-color: #f3f3f3;
 }
 .right {
-  display: flex;
-  align-items: center;
-  /* width: 46%; */
+    display: flex;
+    align-items: center;
+    /* width: 46%; */
 }
 .searchbar {
     width: 344px;
@@ -490,7 +489,7 @@ fieldset {
 .poetName a {
     color: #000;
     cursor: default;
-    font-family: 'merriweatherheavy', 'NotoDevanagari', 'MehrNastaliqRegular';
+    font-family: "merriweatherheavy", "NotoDevanagari", "MehrNastaliqRegular";
     text-transform: uppercase;
     text-decoration: none;
 }
@@ -786,7 +785,7 @@ fieldset {
     margin-top: 20px;
 }
 .book-slide {
-    width: 195px ;
+    width: 195px;
     margin-right: 16px;
 }
 .book-slide a {
@@ -1080,6 +1079,23 @@ iframe {
     font-style: italic;
     font-weight: lighter;
     word-spacing: 8.2px;
+}
+.latest {
+ 
+    /* margin: 0 auto;
+    height: 95px;
+    background-color: red; */
+}
+
+.latest p {
+    font-size: 24px;
+    line-height: 1.5;
+    color: #000;
+    font-family: "merriweather";
+    font-style: italic;
+    font-weight: lighter;
+    word-spacing: 8.2px;
+    
 }
 .poet {
     margin-top: 16px;
@@ -1967,88 +1983,242 @@ iframe {
     margin: 0 8px;
 }
 @media screen and (max-width: 1820px) {
-  .navbar > ul > li:nth-child(9) { display: none; }
-  .left{ gap: 80px; width: 52%;}
+    .navbar > ul > li:nth-child(9) {
+        display: none;
+    }
+    .left {
+        gap: 80px;
+        width: 52%;
+    }
 }
 @media screen and (max-width: 1715px) {
-  .navbar > ul > li:nth-child(8) { display: none; }
-  .left{ gap: 75px; width: 48%;}
-
+    .navbar > ul > li:nth-child(8) {
+        display: none;
+    }
+    .left {
+        gap: 75px;
+        width: 48%;
+    }
 }
 @media (max-width: 1653px) {
-  .navbar > ul > li:nth-child(7) { display: none; }
+    .navbar > ul > li:nth-child(7) {
+        display: none;
+    }
 }
 @media (max-width: 1570px) {
-  .navbar > ul >li:nth-child(6) { display: none; }
+    .navbar > ul > li:nth-child(6) {
+        display: none;
+    }
 }
 @media (max-width: 1509px) {
-  .navbar > ul > li:nth-child(5) { display: none; }
-  .navbar ul li{ font-size: 12px;}
-  .left{ gap: 70px; width: 47%;}
-  .searchbar{ width: 250px;}
+    .navbar > ul > li:nth-child(5) {
+        display: none;
+    }
+    .navbar ul li {
+        font-size: 12px;
+    }
+    .left {
+        gap: 70px;
+        width: 47%;
+    }
+    .searchbar {
+        width: 250px;
+    }
 }
 @media screen and (max-width: 1309px) {
-  .navbar > ul > li a{ font-size: 14px;}
-  .left{ gap: 40px; }
-  .searchbar{ width: 200px;     padding-top: 15px;}
-  fieldset {  padding-inline: 0.4em; padding-block: 0.75em 0.5em;}
-  .microphone i, .searcIcon i{font-size: 14px;}
-  .searchbar form input{font-size: 12px; width: 100px;}
-  .logIn a{    padding: 19px 22px;}
-  .language, .logIn, .notification, .getApp, .donate{padding: 0px 0px 0px 0px;  margin-right: 8px; font-size: 10px;}
+    .navbar > ul > li a {
+        font-size: 14px;
+    }
+    .left {
+        gap: 40px;
+    }
+    .searchbar {
+        width: 200px;
+        padding-top: 15px;
+    }
+    fieldset {
+        padding-inline: 0.4em;
+        padding-block: 0.75em 0.5em;
+    }
+    .microphone i,
+    .searcIcon i {
+        font-size: 14px;
+    }
+    .searchbar form input {
+        font-size: 12px;
+        width: 100px;
+    }
+    .logIn a {
+        padding: 19px 22px;
+    }
+    .language,
+    .logIn,
+    .notification,
+    .getApp,
+    .donate {
+        padding: 0px 0px 0px 0px;
+        margin-right: 8px;
+        font-size: 10px;
+    }
 }
 @media screen and (max-width: 1191px) {
-.logo{width: 100px; margin-top: 24px;}
-  .navbar > ul > li a{ font-size: 12px;}
-  .left{ gap: 20px; width: 41%; }
-  .grid-icon span { width: 3px; height: 4px;}
-   .grid-icon{ grid-template-columns: repeat(3, 4px);}
-  .dropdown p{font-size: 12px;}
-  fieldset {  padding-inline: 0.2em; padding-block: 0.75em 0.5em;}
-  .microphone i, .searcIcon i{font-size: 12px;}
-  .navbar ul li:nth-child(4) { display: none; }
-
+    .logo {
+        width: 100px;
+        margin-top: 24px;
+    }
+    .navbar > ul > li a {
+        font-size: 12px;
+    }
+    .left {
+        gap: 20px;
+        width: 41%;
+    }
+    .grid-icon span {
+        width: 3px;
+        height: 4px;
+    }
+    .grid-icon {
+        grid-template-columns: repeat(3, 4px);
+    }
+    .dropdown p {
+        font-size: 12px;
+    }
+    fieldset {
+        padding-inline: 0.2em;
+        padding-block: 0.75em 0.5em;
+    }
+    .microphone i,
+    .searcIcon i {
+        font-size: 12px;
+    }
+    .navbar ul li:nth-child(4) {
+        display: none;
+    }
 }
 @media screen and (max-width: 1024px) {
-.logo{width: 90px; margin-top: 24px;}
-  .navbar li a{ font-size: 12px;}
-  .left{ gap: 10px; width: 47%;}
-  .logIn a{    font-size: 12px;}
-  .searchbar{ width: 170px;     padding-top: 15px;}
-  .dropdown p{font-size: 12px;}
-  fieldset {  padding-block: 0.75em 0.5em; }
+    .logo {
+        width: 90px;
+        margin-top: 24px;
+    }
+    .navbar li a {
+        font-size: 12px;
+    }
+    .left {
+        gap: 10px;
+        width: 47%;
+    }
+    .logIn a {
+        font-size: 12px;
+    }
+    .searchbar {
+        width: 170px;
+        padding-top: 15px;
+    }
+    .dropdown p {
+        font-size: 12px;
+    }
+    fieldset {
+        padding-block: 0.75em 0.5em;
+    }
 }
 @media screen and (max-width: 924px) {
-.logo{width: 90px; margin-top: 24px;}
-  .left{ width: 50%;}
+    .logo {
+        width: 90px;
+        margin-top: 24px;
+    }
+    .left {
+        width: 50%;
+    }
 
-.getApp a , .donate a{font-size: 10px;     margin-right: 7px;}
-  .language, .logIn, .notification, .getApp, .donate{padding: 0px 0px 0px 0px;  margin-right: 5px; }
-.language .dropdown {padding: 9px 28px 10px 6px;}
+    .getApp a,
+    .donate a {
+        font-size: 10px;
+        margin-right: 7px;
+    }
+    .language,
+    .logIn,
+    .notification,
+    .getApp,
+    .donate {
+        padding: 0px 0px 0px 0px;
+        margin-right: 5px;
+    }
+    .language .dropdown {
+        padding: 9px 28px 10px 6px;
+    }
 
-  .logIn a{ font-size: 12px; padding: 28px 8px;}
-  .searchbar{ width: 150px;     padding-top: 15px;}
-  .dropdown p{font-size: 12px;}
-  fieldset {  padding-block: 0.75em 0.5em; }
+    .logIn a {
+        font-size: 12px;
+        padding: 28px 8px;
+    }
+    .searchbar {
+        width: 150px;
+        padding-top: 15px;
+    }
+    .dropdown p {
+        font-size: 12px;
+    }
+    fieldset {
+        padding-block: 0.75em 0.5em;
+    }
 }
 @media (max-width: 840px) {
-  .navbar > ul >li:nth-child(3) { display: none; }
-  .left{ gap: 10px; width: 44%;}
-.logIn a {padding: 20px 8px;}
-
+    .navbar > ul > li:nth-child(3) {
+        display: none;
+    }
+    .left {
+        gap: 10px;
+        width: 44%;
+    }
+    .logIn a {
+        padding: 20px 8px;
+    }
 }
 
 @media (max-width: 750px) {
-  .navbar { display: none; }
-  .right .menu-toggle { display: block; cursor: pointer; font-size: 22px; padding: 10px; }
-  .mobile-nav { display: none; flex-direction: column; top: 65px; left: 0; right: 0; background: white; z-index: 10000;  width: 60%; }
-  .mobile-nav li { padding: 12px; }
-  .left{ gap: 10px; width: 33%;}
-  .getApp , .donate{display: none;}
-  .searchbar{ width: 200px;     padding-top: 15px;}
-  .right{gap:10px; padding-right: 10px;}
-  
+    .navbar {
+        display: none;
+    }
+    .right .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 22px;
+        padding: 10px;
+    }
+    .mobile-nav {
+        display: none;
+        flex-direction: column;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: white;
+        z-index: 10000;
+        width: 60%;
+    }
+    .mobile-nav li {
+        padding: 12px;
+    }
+    .left {
+        gap: 10px;
+        width: 33%;
+    }
+    .getApp,
+    .donate {
+        display: none;
+    }
+    .searchbar {
+        width: 200px;
+        padding-top: 15px;
+    }
+    .right {
+        gap: 10px;
+        padding-right: 10px;
+    }
 }
 
-.menu-toggle { display: none; }
-.mobile-nav { display: none;}
+.menu-toggle {
+    display: none;
+}
+.mobile-nav {
+    display: none;
+}
