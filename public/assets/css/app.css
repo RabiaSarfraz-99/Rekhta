@@ -794,7 +794,7 @@ fieldset {
     margin-top: 20px;
 }
 .book-slide {
-    width: 195px !important;
+    width: 195px ;
     margin-right: 16px;
 }
 .book-slide a {
